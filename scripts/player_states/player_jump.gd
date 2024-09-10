@@ -3,6 +3,7 @@ class_name PlayerJump
 var player:Player
 
 func Enter():
+	state_transition.emit()
 	player = get_parent().get_parent()
 	player.velocity.y = -player.jump_power
 	player.jump_queued = false

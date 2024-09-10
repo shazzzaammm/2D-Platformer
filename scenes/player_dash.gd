@@ -5,6 +5,7 @@ var input_vector:Vector2
 var timer:float
 
 func Enter():
+	state_transition.emit()
 	player = get_parent().get_parent()
 	input_vector = Input.get_vector("Move_Left","Move_Right","Move_Up","Move_Down")
 	if input_vector == Vector2.ZERO:

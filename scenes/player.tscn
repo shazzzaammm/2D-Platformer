@@ -1,16 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://c0e1w7qof3e76"]
+[gd_scene load_steps=12 format=3 uid="uid://c0e1w7qof3e76"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1wexn"]
-[ext_resource type="Texture2D" uid="uid://dg2p4vw888tdi" path="res://assets/images/square.png" id="1_5fsu4"]
 [ext_resource type="Script" path="res://scripts/finite_state_machine.gd" id="2_ob0ob"]
 [ext_resource type="Script" path="res://scenes/player_dash.gd" id="3_pi3n1"]
 [ext_resource type="Script" path="res://scripts/player_states/player_idle.gd" id="4_lac5b"]
 [ext_resource type="Script" path="res://scripts/player_states/player_move_grounded.gd" id="5_f6cnm"]
 [ext_resource type="Script" path="res://scripts/player_states/player_air_movement.gd" id="6_2fqod"]
+[ext_resource type="Texture2D" uid="uid://bdu8l2bjgde13" path="res://assets/images/player.png" id="8_k757o"]
 [ext_resource type="Script" path="res://scripts/player_states/player_jump.gd" id="8_uu4u0"]
+[ext_resource type="Script" path="res://scenes/player_animation.gd" id="9_68pmt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ssm78"]
-size = Vector2(16, 26)
+size = Vector2(18, 18)
+
+[sub_resource type="Gradient" id="Gradient_8j0n8"]
+colors = PackedColorArray(1, 1, 1, 1, 0.205117, 0.205117, 0.205117, 1)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_1wexn")
@@ -18,7 +22,7 @@ grounded_movement_speed = 300.0
 air_movement_speed = 300.0
 max_fall_speed = 1000.0
 coyote_time = 1.0
-jump_height = 150.0
+jump_height = 128.0
 jump_rising_time = 0.35
 jump_falling_time = 0.25
 dash_distance = 120.0
@@ -45,16 +49,33 @@ script = ExtResource("8_uu4u0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-2.08616e-07, 0)
-scale = Vector2(0.25, 0.4)
-texture = ExtResource("1_5fsu4")
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("8_k757o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ssm78")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(-4, 41)
+zoom = Vector2(1.5, 1.5)
 position_smoothing_enabled = true
 position_smoothing_speed = 7.5
 
 [node name="GroundCheck" type="RayCast2D" parent="."]
-target_position = Vector2(0, 60)
+target_position = Vector2(0, 65)
+
+[node name="PlayerAnimation" type="Node" parent="."]
+script = ExtResource("9_68pmt")
+
+[node name="DashTrail" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 3
+one_shot = true
+spread = 0.0
+gravity = Vector2(0, 20)
+scale_amount_min = 16.0
+scale_amount_max = 16.0
+color_ramp = SubResource("Gradient_8j0n8")
+
+[connection signal="state_transition" from="FiniteStateMachine/PlayerDash" to="PlayerAnimation" method="on_dash"]
+[connection signal="state_transition" from="FiniteStateMachine/PlayerGroundedMovement" to="PlayerAnimation" method="on_land"]
+[connection signal="state_transition" from="FiniteStateMachine/PlayerJump" to="PlayerAnimation" method="on_jump"]

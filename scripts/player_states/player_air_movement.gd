@@ -2,6 +2,7 @@ extends State
 class_name  PlayerAirMovement
 var player:Player
 func Enter():
+	state_transition.emit()
 	player = get_parent().get_parent()
 	
 func Update(_delta:float):

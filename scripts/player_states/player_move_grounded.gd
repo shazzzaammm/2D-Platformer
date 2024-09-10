@@ -4,6 +4,7 @@ class_name PlayerGroundedMovement
 var player:Player
 
 func Enter():
+	state_transition.emit()
 	player = get_parent().get_parent()
 	player.velocity.y = 0
 
@@ -20,8 +21,7 @@ func Update(_delta:float):
 	var movement_direction = Input.get_axis("Move_Left","Move_Right")
 	player.velocity.x = player.grounded_movement_speed * movement_direction
 
-	#if (player.velocity == Vector2.ZERO):
-		#get_parent().change_state(self, "PlayerIdle")
+
 
 func Exit():
 	pass

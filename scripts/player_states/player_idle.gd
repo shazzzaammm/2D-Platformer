@@ -4,6 +4,7 @@ class_name PlayerIdle
 var player:Player
 
 func Enter():
+	state_transition.emit()
 	player = get_parent().get_parent()
 	
 func Update(_delta:float):
