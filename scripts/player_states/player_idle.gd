@@ -1,18 +1,23 @@
 extends State
 class_name PlayerIdle
 
+var player:Player
+
 func Enter():
-	pass
+	player = get_parent().get_parent()
 	
 func Update(_delta:float):
 	if (Input.is_action_just_pressed("Dash")):
-		pass # -> dash state
+		get_parent().change_state(self, "PlayerDash")
 	
 	if (Input.get_axis("Move_Left", "Move_Right")):
-		pass # -> ground move state
+		get_parent().change_state(self, "PlayerGroundedMovement")
 	
 	if (Input.is_action_just_pressed("Jump")):
-		pass # -> air move state
+		get_parent().change_state(self, "PlayerJump")
+	
+	if (!player.is_on_floor()):
+		get_parent().change_state(self, "PlayerAirMovement")
 	
 func Exit():
 	pass

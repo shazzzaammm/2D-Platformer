@@ -58,3 +58,8 @@ position_smoothing_speed = 7.5
 
 [node name="GroundCheck" type="RayCast2D" parent="."]
 target_position = Vector2(0, 60)
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

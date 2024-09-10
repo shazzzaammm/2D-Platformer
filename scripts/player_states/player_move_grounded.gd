@@ -1,20 +1,27 @@
 extends State
 class_name PlayerGroundedMovement
 
-@export var speed : float
+var player:Player
 
 func Enter():
-	pass
+	player = get_parent().get_parent()
+	player.velocity.y = 0
 
 func Update(_delta:float):
 	if (Input.is_action_just_pressed("Dash")):
-		pass # -> dash state
+		get_parent().change_state(self, "PlayerDash")
 
-	if Input.is_action_just_pressed("Jump"):
-		pass # -> air movement
+	if Input.is_action_just_pressed("Jump") or player.jump_queued:
+		get_parent().change_state(self, "PlayerJump")
 	
-	var movement_vector = Input.get_axis("Move_Left", "Move_Right")
-	# Do ground movement
+	if (!player.is_on_floor()):
+		get_parent().change_state(self, "PlayerAirMovement")
+		
+	var movement_direction = Input.get_axis("Move_Left","Move_Right")
+	player.velocity.x = player.grounded_movement_speed * movement_direction
+
+	#if (player.velocity == Vector2.ZERO):
+		#get_parent().change_state(self, "PlayerIdle")
 
 func Exit():
 	pass
