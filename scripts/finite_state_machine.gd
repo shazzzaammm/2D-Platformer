@@ -12,7 +12,7 @@ func _ready():
 	current_state = initial_state
 	current_state.Enter()
 
-func _process(delta):
+func _physics_process(delta):
 	current_state.Update(delta)
 
 func change_state(source_state, desired_state_name):

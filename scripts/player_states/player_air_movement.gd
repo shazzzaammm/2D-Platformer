@@ -13,8 +13,12 @@ func Update(_delta:float):
 	if player.is_on_floor():
 		get_parent().change_state(self, "PlayerGroundedMovement")
 	
-	if Input.is_action_just_pressed("Jump") and player.ground_check_ray.is_colliding():
-		player.jump_queued = true
+	if Input.is_action_just_pressed("Jump"):
+		if player.ground_check_ray.is_colliding():
+			player.jump_queued = true
+		elif player.coyote_ready:
+			get_parent().change_state(self, "PlayerJump")
+	
 	
 	player.velocity.y -= player.fall_gravity * _delta
 	
@@ -22,7 +26,10 @@ func Update(_delta:float):
 		player.velocity.y = player.max_fall_speed
 	
 	var movement_direction = Input.get_axis("Move_Left","Move_Right")
-	player.velocity.x = player.air_movement_speed * movement_direction
+	if movement_direction == 0:
+		player.velocity.x = lerpf(player.velocity.x,0.0,0.1)
+	else:
+		player.velocity.x = player.air_movement_speed * movement_direction
 	
 func Exit():
 	pass

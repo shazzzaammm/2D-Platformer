@@ -20,7 +20,11 @@ func Update(_delta:float):
 		get_parent().change_state(self, "PlayerAirMovement")
 		
 	var movement_direction = Input.get_axis("Move_Left","Move_Right")
-	player.velocity.x = player.grounded_movement_speed * movement_direction
+	if movement_direction == 0:
+		player.velocity.x = lerpf(player.velocity.x,0.0,.2)
+	else:
+		player.velocity.x = player.grounded_movement_speed * movement_direction
 	
 func Exit():
-	pass
+	player.coyote_ready = true
+	player.coyote_timer.start()

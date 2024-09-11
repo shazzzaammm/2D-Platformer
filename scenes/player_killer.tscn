@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cowsu258dkd51"]
+
+[ext_resource type="Script" path="res://scripts/player_killer.gd" id="1_06btl"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_hvs84"]
+
+[node name="PlayerKiller" type="Area2D"]
+script = ExtResource("1_06btl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_hvs84")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -12,4 +12,17 @@ script = ExtResource("1_dkd7e")
 position = Vector2(0, -35.5)
 shape = SubResource("RectangleShape2D_0dipq")
 
+[node name="EnterEffect" type="CPUParticles2D" parent="."]
+position = Vector2(0, -30)
+emitting = false
+amount = 32
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+initial_velocity_min = 32.0
+initial_velocity_max = 64.0
+scale_amount_max = 3.0
+color = Color(1, 0.783333, 0, 1)
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
