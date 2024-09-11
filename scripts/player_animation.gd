@@ -19,7 +19,7 @@ func on_jump():
 	tween = player.create_tween()
 	tween.tween_property(sprite, "scale", Vector2(initial_scale.x * .5, initial_scale.y * 2), .1)
 	tween.tween_property(sprite, "scale", initial_scale, .1)
-	
+
 func on_land():
 	tween.kill()
 	tween = player.create_tween()

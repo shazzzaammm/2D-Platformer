@@ -11,6 +11,7 @@ func Enter():
 	if input_vector == Vector2.ZERO:
 		get_parent().change_state(self, "PlayerAirMovement")
 	timer = player.dash_time
+	player.can_dash = false
 	
 func Update(_delta:float):
 	player.velocity = input_vector.normalized() * player.dash_speed	

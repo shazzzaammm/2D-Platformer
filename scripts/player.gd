@@ -26,7 +26,10 @@ var jump_queued:bool= false
 @export var dash_time:float
 
 @onready var dash_speed = dash_distance / dash_time
-
+var can_dash = true
 
 func _physics_process(_delta):
 	move_and_slide()
+	
+func on_touch_ground():
+	can_dash = true

@@ -6,7 +6,8 @@ func Enter():
 	player = get_parent().get_parent()
 	
 func Update(_delta:float):
-	if (Input.is_action_just_pressed("Dash")):
+	if (Input.is_action_just_pressed("Dash") and player.can_dash 
+	and Input.get_vector("Move_Left","Move_Right","Move_Up","Move_Down") != Vector2.ZERO):
 		get_parent().change_state(self, "PlayerDash")
 	
 	if player.is_on_floor():

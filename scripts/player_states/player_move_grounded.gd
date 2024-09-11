@@ -9,7 +9,8 @@ func Enter():
 	player.velocity.y = 0
 
 func Update(_delta:float):
-	if (Input.is_action_just_pressed("Dash")):
+	if (Input.is_action_just_pressed("Dash") and player.can_dash 
+	and Input.get_vector("Move_Left","Move_Right","Move_Up","Move_Down") != Vector2.ZERO):
 		get_parent().change_state(self, "PlayerDash")
 
 	if Input.is_action_just_pressed("Jump") or player.jump_queued:
@@ -20,8 +21,6 @@ func Update(_delta:float):
 		
 	var movement_direction = Input.get_axis("Move_Left","Move_Right")
 	player.velocity.x = player.grounded_movement_speed * movement_direction
-
-
-
+	
 func Exit():
 	pass
