@@ -14,7 +14,7 @@ class_name Player
 @export var jump_height:float
 @export var jump_rising_time:float
 @export var jump_falling_time:float
-
+@export var coyote_time:float
 @onready var coyote_timer:Timer = $CoyoteTimer 
 var jump_queued:bool= false
 var coyote_ready:bool = false
@@ -29,6 +29,9 @@ var coyote_ready:bool = false
 
 @onready var dash_speed = dash_distance / dash_time
 var can_dash = true
+
+func _ready():
+	coyote_timer.wait_time = coyote_time
 
 func _physics_process(_delta):
 	move_and_slide()

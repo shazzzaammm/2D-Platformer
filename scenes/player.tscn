@@ -27,6 +27,7 @@ max_fall_speed = 1000.0
 jump_height = 128.0
 jump_rising_time = 0.35
 jump_falling_time = 0.25
+coyote_time = 0.1
 dash_distance = 128.0
 dash_time = 0.15
 
@@ -37,11 +38,11 @@ initial_state = NodePath("PlayerIdle")
 [node name="PlayerDash" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("3_pi3n1")
 
-[node name="PlayerIdle" type="Node" parent="FiniteStateMachine"]
-script = ExtResource("4_lac5b")
-
 [node name="PlayerGroundedMovement" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("5_f6cnm")
+
+[node name="PlayerIdle" type="Node" parent="FiniteStateMachine"]
+script = ExtResource("4_lac5b")
 
 [node name="PlayerAirMovement" type="Node" parent="FiniteStateMachine"]
 script = ExtResource("6_2fqod")
@@ -82,7 +83,7 @@ color_ramp = SubResource("Gradient_8j0n8")
 script = ExtResource("10_b2w4u")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
 
 [connection signal="state_transition" from="FiniteStateMachine/PlayerDash" to="PlayerAnimation" method="on_dash"]

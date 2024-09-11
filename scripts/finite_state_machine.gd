@@ -28,4 +28,4 @@ func change_state(source_state, desired_state_name):
 	current_state = desired_state
 	current_state.Enter()
 	
-	print("Success! Changed from " + source_state.name + " to " + desired_state_name)
+	#print("Success! Changed from " + source_state.name + " to " + desired_state_name)

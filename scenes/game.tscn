@@ -35,7 +35,7 @@ player = NodePath("../Player")
 position = Vector2(856, -176)
 scale = Vector2(9, 1)
 offset = Vector2(23, 0)
-duration = 3.0
+start_delay = 0.0
 
 [node name="Label" type="Label" parent="."]
 offset_left = -88.0

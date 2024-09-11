@@ -13,7 +13,11 @@ size = Vector2(16, 17)
 position = Vector2(0, -8)
 script = ExtResource("1_1lfi4")
 offset = Vector2(0, 16)
-duration = 5.0
+duration = 2.5
+start_delay = 0.25
+end_delay = 0.25
+auto_enable = false
+enable_with_player = true
 
 [node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
 
