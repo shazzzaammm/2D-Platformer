@@ -26,4 +26,3 @@ func Update(_delta:float):
 	else:
 		player.velocity.x = player.air_movement_speed * movement_direction
 	player.velocity.y -= player.jump_gravity * _delta
-

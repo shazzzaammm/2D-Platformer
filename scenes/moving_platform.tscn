@@ -7,7 +7,7 @@
 size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ycub1"]
-size = Vector2(16, 17)
+size = Vector2(16, 21)
 
 [node name="MovingPlatform" type="Node2D"]
 position = Vector2(0, -8)
@@ -34,7 +34,7 @@ region_rect = Rect2(0, 0, 16, 16)
 [node name="PlayerDetector" type="Area2D" parent="AnimatableBody2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D/PlayerDetector"]
-position = Vector2(0, 7.5)
+position = Vector2(0, 5.5)
 shape = SubResource("RectangleShape2D_ycub1")
 
 [connection signal="body_entered" from="AnimatableBody2D/PlayerDetector" to="." method="_on_body_entered"]
