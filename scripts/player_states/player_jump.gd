@@ -1,5 +1,6 @@
 extends State
 class_name PlayerJump
+
 var player:Player
 
 func Enter():

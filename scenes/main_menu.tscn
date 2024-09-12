@@ -61,5 +61,6 @@ grow_vertical = 2
 text = "Play"
 label_settings = SubResource("LabelSettings_aivdi")
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="PlayButton" to="PlayButton" method="_on_pressed"]

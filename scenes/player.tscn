@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c0e1w7qof3e76"]
+[gd_scene load_steps=14 format=3 uid="uid://c0e1w7qof3e76"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_1wexn"]
 [ext_resource type="Script" path="res://scripts/finite_state_machine.gd" id="2_ob0ob"]
@@ -17,12 +17,15 @@ size = Vector2(18, 18)
 [sub_resource type="Gradient" id="Gradient_8j0n8"]
 colors = PackedColorArray(1, 1, 1, 1, 0.205117, 0.205117, 0.205117, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dyfga"]
+size = Vector2(18, 18)
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_1wexn")
 grounded_movement_speed = 400.0
 grounded_friction_percentage = 0.1
 air_movement_speed = 400.0
-air_friction_percentage = 0.025
+air_friction_percentage = 0.2
 max_fall_speed = 1000.0
 jump_height = 128.0
 jump_rising_time = 0.35
@@ -86,8 +89,16 @@ script = ExtResource("10_b2w4u")
 wait_time = 0.1
 one_shot = true
 
+[node name="DeathDetector" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathDetector"]
+shape = SubResource("RectangleShape2D_dyfga")
+
 [connection signal="state_transition" from="FiniteStateMachine/PlayerDash" to="PlayerAnimation" method="on_dash"]
 [connection signal="state_transition" from="FiniteStateMachine/PlayerGroundedMovement" to="." method="on_touch_ground"]
 [connection signal="state_transition" from="FiniteStateMachine/PlayerGroundedMovement" to="PlayerAnimation" method="on_land"]
 [connection signal="state_transition" from="FiniteStateMachine/PlayerJump" to="PlayerAnimation" method="on_jump"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="body_entered" from="DeathDetector" to="PlayerDeath" method="_kill_player_on_collision"]
