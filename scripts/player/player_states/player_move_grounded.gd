@@ -21,9 +21,9 @@ func Update(_delta:float):
 		
 	var movement_direction = Input.get_axis("Move_Left","Move_Right")
 	if movement_direction == 0:
-		player.velocity.x = lerpf(player.velocity.x,0.0,.2)
+		player.velocity.x = lerpf(player.velocity.x,0.0,player.grounded_friction_percentage)
 	else:
-		player.velocity.x = player.grounded_movement_speed * movement_direction
+		player.velocity.x = lerpf(player.velocity.x, player.grounded_movement_speed * movement_direction, player.grounded_acceleration_percentage)
 	
 func Exit():
 	player.coyote_ready = true

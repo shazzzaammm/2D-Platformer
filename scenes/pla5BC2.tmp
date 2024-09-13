@@ -1,16 +1,16 @@
 [gd_scene load_steps=15 format=3 uid="uid://c0e1w7qof3e76"]
 
-[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_1wexn"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_1wexn"]
 [ext_resource type="Script" path="res://scripts/finite_state_machine.gd" id="2_ob0ob"]
-[ext_resource type="Script" path="res://scripts/player/player_dash.gd" id="3_pi3n1"]
-[ext_resource type="Script" path="res://scripts/player/player_states/player_idle.gd" id="4_lac5b"]
-[ext_resource type="Script" path="res://scripts/player/player_states/player_move_grounded.gd" id="5_f6cnm"]
-[ext_resource type="Script" path="res://scripts/player/player_states/player_air_movement.gd" id="6_2fqod"]
+[ext_resource type="Script" path="res://scripts/player_dash.gd" id="3_pi3n1"]
+[ext_resource type="Script" path="res://scripts/player_states/player_idle.gd" id="4_lac5b"]
+[ext_resource type="Script" path="res://scripts/player_states/player_move_grounded.gd" id="5_f6cnm"]
+[ext_resource type="Script" path="res://scripts/player_states/player_air_movement.gd" id="6_2fqod"]
 [ext_resource type="Texture2D" uid="uid://bdu8l2bjgde13" path="res://assets/images/player.png" id="8_k757o"]
-[ext_resource type="Script" path="res://scripts/player/player_states/player_jump.gd" id="8_uu4u0"]
-[ext_resource type="Script" path="res://scripts/player/player_states/player_wall_jump.gd" id="8_yythc"]
-[ext_resource type="Script" path="res://scripts/player/player_animation.gd" id="9_68pmt"]
-[ext_resource type="Script" path="res://scripts/player/player_death.gd" id="10_b2w4u"]
+[ext_resource type="Script" path="res://scripts/player_states/player_jump.gd" id="8_uu4u0"]
+[ext_resource type="Script" path="res://scripts/player_states/player_wall_jump.gd" id="8_yythc"]
+[ext_resource type="Script" path="res://scripts/player_animation.gd" id="9_68pmt"]
+[ext_resource type="Script" path="res://scripts/player_death.gd" id="10_b2w4u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ssm78"]
 size = Vector2(18, 18)
@@ -24,18 +24,16 @@ size = Vector2(18, 18)
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_1wexn")
 grounded_movement_speed = 400.0
-grounded_friction_percentage = 0.25
-grounded_acceleration_percentage = 0.75
+grounded_friction_percentage = 0.1
 air_movement_speed = 400.0
 air_friction_percentage = 0.2
-air_acceleration_percentage = 0.5
 max_fall_speed = 1000.0
 jump_height = 128.0
 jump_rising_time = 0.35
 jump_falling_time = 0.25
 coyote_time = 0.1
-wall_jump_length = 32.0
-wall_jump_time = 0.12
+wall_jump_length = 1000.0
+wall_jump_time = 1.0
 dash_distance = 128.0
 dash_time = 0.15
 

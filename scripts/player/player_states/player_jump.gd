@@ -25,5 +25,5 @@ func Update(_delta:float):
 	if movement_direction == 0:
 		player.velocity.x = lerpf(player.velocity.x,0.0,0.1)
 	else:
-		player.velocity.x = player.air_movement_speed * movement_direction
+		player.velocity.x = lerpf(player.velocity.x, player.grounded_movement_speed * movement_direction, player.air_acceleration_percentage)
 	player.velocity.y -= player.jump_gravity * _delta

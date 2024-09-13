@@ -20,7 +20,8 @@ func Update(_delta:float):
 			player.jump_queued = true
 		elif player.coyote_ready:
 			get_parent().change_state(self, "PlayerJump")
-	
+		elif player.is_on_wall():
+			get_parent().change_state(self, "PlayerWallJump")
 	
 	player.velocity.y -= player.fall_gravity * _delta
 	
@@ -31,7 +32,7 @@ func Update(_delta:float):
 	if movement_direction == 0:
 		player.velocity.x = lerpf(player.velocity.x,0.0,0.1)
 	else:
-		player.velocity.x = player.air_movement_speed * movement_direction
+		player.velocity.x = lerpf(player.velocity.x, player.grounded_movement_speed * movement_direction, player.air_acceleration_percentage)
 	
 func Exit():
 	pass

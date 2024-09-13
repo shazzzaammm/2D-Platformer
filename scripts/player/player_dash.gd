@@ -16,6 +16,7 @@ func Enter():
 func Update(_delta:float):
 	player.velocity = input_vector.normalized() * player.dash_speed	
 	timer -= _delta
+
 	if timer <= 0:
 		get_parent().change_state(self, "PlayerAirMovement")
 	
