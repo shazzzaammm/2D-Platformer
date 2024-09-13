@@ -34,7 +34,7 @@ jump_height = 128.0
 jump_rising_time = 0.35
 jump_falling_time = 0.25
 coyote_time = 0.1
-wall_jump_length = 32.0
+wall_jump_length = 30.0
 wall_jump_time = 0.12
 dash_distance = 128.0
 dash_time = 0.15
@@ -77,6 +77,12 @@ position_smoothing_speed = 7.5
 [node name="GroundCheck" type="RayCast2D" parent="."]
 target_position = Vector2(0, 65)
 
+[node name="LeftWallCheck" type="RayCast2D" parent="."]
+target_position = Vector2(-20, 0)
+
+[node name="RightWallCheck" type="RayCast2D" parent="."]
+target_position = Vector2(20, 0)
+
 [node name="PlayerAnimation" type="Node" parent="."]
 script = ExtResource("9_68pmt")
 
@@ -107,6 +113,7 @@ shape = SubResource("RectangleShape2D_dyfga")
 [connection signal="state_transition" from="FiniteStateMachine/PlayerDash" to="PlayerAnimation" method="on_dash"]
 [connection signal="state_transition" from="FiniteStateMachine/PlayerGroundedMovement" to="." method="on_touch_ground"]
 [connection signal="state_transition" from="FiniteStateMachine/PlayerGroundedMovement" to="PlayerAnimation" method="on_land"]
+[connection signal="state_transition" from="FiniteStateMachine/PlayerIdle" to="PlayerAnimation" method="on_idle"]
 [connection signal="state_transition" from="FiniteStateMachine/PlayerJump" to="PlayerAnimation" method="on_jump"]
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="body_entered" from="DeathDetector" to="PlayerDeath" method="_kill_player_on_collision"]

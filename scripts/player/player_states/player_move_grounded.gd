@@ -19,6 +19,8 @@ func Update(_delta:float):
 	if (!player.is_on_floor()):
 		get_parent().change_state(self, "PlayerAirMovement")
 		
+	if player.velocity.distance_to(Vector2.ZERO) < 0.05:
+		get_parent().change_state(self, "PlayerIdle")
 	var movement_direction = Input.get_axis("Move_Left","Move_Right")
 	if movement_direction == 0:
 		player.velocity.x = lerpf(player.velocity.x,0.0,player.grounded_friction_percentage)

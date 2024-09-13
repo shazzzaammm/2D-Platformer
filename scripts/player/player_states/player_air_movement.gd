@@ -7,6 +7,7 @@ func Enter():
 	state_transition.emit()
 	player = get_parent().get_parent()
 	
+	
 func Update(_delta:float):
 	if (Input.is_action_just_pressed("Dash") and player.can_dash 
 	and Input.get_vector("Move_Left","Move_Right","Move_Up","Move_Down") != Vector2.ZERO):
@@ -16,12 +17,12 @@ func Update(_delta:float):
 		get_parent().change_state(self, "PlayerGroundedMovement")
 	
 	if Input.is_action_just_pressed("Jump"):
-		if player.ground_check_ray.is_colliding():
-			player.jump_queued = true
-		elif player.coyote_ready:
+		if player.coyote_ready:
 			get_parent().change_state(self, "PlayerJump")
-		elif player.is_on_wall():
+		elif player.is_on_wall() or player.right_wall_check.is_colliding() or player.left_wall_check.is_colliding():
 			get_parent().change_state(self, "PlayerWallJump")
+		elif player.ground_check_ray.is_colliding():
+			player.jump_queued = true
 	
 	player.velocity.y -= player.fall_gravity * _delta
 	

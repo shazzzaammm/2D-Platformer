@@ -31,6 +31,8 @@ var coyote_ready:bool = false
 @export var wall_jump_time:float
 
 @onready var wall_jump_power:float = (2.0 * wall_jump_length) / wall_jump_time
+@onready var left_wall_check:RayCast2D = $LeftWallCheck
+@onready var right_wall_check:RayCast2D = $RightWallCheck
 
 @export_group("Dash")
 @export var dash_distance:float
