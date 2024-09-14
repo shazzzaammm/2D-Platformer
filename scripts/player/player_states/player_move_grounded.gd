@@ -9,8 +9,8 @@ func Enter():
 	player.velocity.y = 0
 
 func Update(_delta:float):
-	if (Input.is_action_just_pressed("Dash") and player.can_dash 
-	and Input.get_vector("Move_Left","Move_Right","Move_Up","Move_Down") != Vector2.ZERO):
+	var input_vector = Input.get_vector("Move_Left","Move_Right","Move_Up","Move_Down")
+	if (Input.is_action_just_pressed("Dash") and player.can_dash and input_vector != Vector2.ZERO):
 		get_parent().change_state(self, "PlayerDash")
 
 	if Input.is_action_just_pressed("Jump") or player.jump_queued:
@@ -19,9 +19,9 @@ func Update(_delta:float):
 	if (!player.is_on_floor()):
 		get_parent().change_state(self, "PlayerAirMovement")
 		
-	if player.velocity.distance_to(Vector2.ZERO) < 0.05:
+	if player.velocity.distance_to(Vector2.ZERO) < 0.05 and input_vector == Vector2.ZERO:
 		get_parent().change_state(self, "PlayerIdle")
-	var movement_direction = Input.get_axis("Move_Left","Move_Right")
+	var movement_direction = input_vector.x
 	if movement_direction == 0:
 		player.velocity.x = lerpf(player.velocity.x,0.0,player.grounded_friction_percentage)
 	else:

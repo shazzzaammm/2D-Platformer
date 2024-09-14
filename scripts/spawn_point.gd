@@ -1,7 +1,7 @@
 extends Area2D
 class_name SpawnPoint
 
-@export var player:Player
+var player:Player
 @onready var enter_effect:CPUParticles2D = $EnterEffect
 
 func _on_body_entered(body):

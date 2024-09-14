@@ -34,8 +34,8 @@ jump_height = 128.0
 jump_rising_time = 0.35
 jump_falling_time = 0.25
 coyote_time = 0.1
-wall_jump_length = 30.0
-wall_jump_time = 0.12
+wall_jump_length = 32.0
+wall_jump_time = 0.1
 dash_distance = 128.0
 dash_time = 0.15
 

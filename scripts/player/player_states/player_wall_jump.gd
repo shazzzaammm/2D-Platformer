@@ -6,6 +6,7 @@ var timer:float
 var gravity:float
 
 func Enter():
+	state_transition.emit()
 	player=get_parent().get_parent()
 	gravity = player.jump_gravity
 	player.velocity = Vector2(player.get_wall_normal().x * player.wall_jump_power, -player.jump_power)
